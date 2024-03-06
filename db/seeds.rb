@@ -1,9 +1,16 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+puts "Deleting previous data..."
+VideoUpload.destroy_all
+
+puts "🐩 Creating lesson videos..."
+    VideoUpload.create(
+        # title: "Baking 101",
+		caption: "Learn the basics of the most popular baking trends", 
+        video: "https://www.youtube.com/watch?v=62MOCMyPce0&list=PL1dleLLvCiHOrrj2lDtCDiU8oX-ySckf8", 
+        # user_id: User.all.sample.id
+    )
+    VideoUpload.create(
+		# title: "Breath Holding for Free Diving",
+        caption: "In this video, you'll learn how to hold you breath longer than ever before...", 
+        video: "https://www.youtube.com/watch?v=f0IxfdPBujU", 
+        # user_id: User.all.sample.id
+    )
