@@ -1,4 +1,4 @@
-puts "Deleteing previous data..."
+puts "Deleting previous data..."
 VideoUpload.destroy_all
 
 puts "🐩 Creating lesson videos..."
