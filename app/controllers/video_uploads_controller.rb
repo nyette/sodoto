@@ -4,10 +4,13 @@ class VideoUploadsController < ApplicationController
   # GET /video_uploads or /video_uploads.json
   def index
     @video_uploads = VideoUpload.all
+	render json:@video_uploads
   end
 
   # GET /video_uploads/1 or /video_uploads/1.json
   def show
+	@video_upload = VideoUpload.find(params[:id])
+	render json:@video_upload
   end
 
   # GET /video_uploads/new
