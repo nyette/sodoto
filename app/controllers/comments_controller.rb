@@ -3,9 +3,12 @@ class CommentsController < ApplicationController
 
   # GET /comments or /comments.json
   def index
-    @comments = Comment.all
+	@video_upload = VideoUpload.find(params[:video_upload_id])
+    @comments = @video_upload.comments.all
+	render json:@comments
   end
 
+  # TO DO ALL THE BELOW
   # GET /comments/1 or /comments/1.json
   def show
   end
