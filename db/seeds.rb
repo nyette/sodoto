@@ -1,4 +1,5 @@
 puts "Deleting previous data..."
+Comment.destroy_all
 VideoUpload.destroy_all
 
 puts "🐩 Creating lesson videos..."
@@ -13,4 +14,30 @@ puts "🐩 Creating lesson videos..."
         caption: "In this video, you'll learn how to hold you breath longer than ever before...", 
         video: "https://www.youtube.com/watch?v=f0IxfdPBujU", 
         # user_id: User.all.sample.id
+    )
+
+puts "🐩 Creating lesson comments..."
+    Comment.create(
+		content: "This is a great lesson. So helpful!", 
+        video_upload_id: VideoUpload.all.sample.id
+    )
+    Comment.create(
+		content: "You're such a good teacher! Thanks for this awesome video!", 
+        video_upload_id: VideoUpload.all.sample.id
+    )    
+	Comment.create(
+		content: "Can you do a follow up video?", 
+        video_upload_id: VideoUpload.all.sample.id
+    )
+    Comment.create(
+		content: "How long did it take you to learn this yourself?", 
+        video_upload_id: VideoUpload.all.sample.id
+    )
+	Comment.create(
+		content: "Love this!", 
+        video_upload_id: VideoUpload.all.sample.id
+    )
+    Comment.create(
+		content: "I still don't get it...", 
+        video_upload_id: VideoUpload.all.sample.id
     )
