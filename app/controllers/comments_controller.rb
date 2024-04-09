@@ -1,73 +1,56 @@
+# frozen_string_literal: true
+
+# Manage comments
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ show edit update destroy ]
+  before_action :set_comment, only: %i[show update destroy]
 
-  # GET /comments or /comments.json
   def index
-	@video_upload = VideoUpload.find(params[:video_upload_id])
+    @video_upload = VideoUpload.find(params[:video_upload_id])
     @comments = @video_upload.comments.all
-	render json:@comments
+    render json: @comments, status: :ok
   end
 
-  # TO DO ALL THE BELOW
-  # GET /comments/1 or /comments/1.json
   def show
+    render json: @comment, status: :ok
   end
 
-  # GET /comments/new
-  def new
-    @comment = Comment.new
-  end
-
-  # GET /comments/1/edit
-  def edit
-  end
-
-  # POST /comments or /comments.json
   def create
     @comment = Comment.new(comment_params)
-
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to comment_url(@comment), notice: "Comment was successfully created." }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    if @comment.save
+      render json: @comment, status: :ok
+    else
+      render json: @comment.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /comments/1 or /comments/1.json
   def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to comment_url(@comment), notice: "Comment was successfully updated." }
-        format.json { render :show, status: :ok, location: @comment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    if @comment.update(comment_params)
+      render json: @comment, status: :ok
+    else
+      render json: @comment.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /comments/1 or /comments/1.json
   def destroy
     @comment.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: "Comment was successfully destroyed." }
-      format.json { head :no_content }
+    if @comment.destroyed?
+      render json: 'OK', status: :ok
+    else
+      render json: @comment.errors, status: :unprocessable_entity
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def comment_params
-      params.require(:comment).permit(:content, :video_upload_id)
+  def set_comment
+    if Comment.exists?(params[:id])
+      @comment = Comment.find(params[:id])
+    else
+      render json: 'Yikes', status: :not_found
     end
+  end
+
+  def comment_params
+    params.require(:comment).permit(:content, :video_upload_id)
+  end
 end
