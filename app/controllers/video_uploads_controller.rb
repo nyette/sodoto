@@ -1,16 +1,19 @@
+# frozen_string_literal: true
+
+# Manage videos
 class VideoUploadsController < ApplicationController
-  before_action :set_video_upload, only: %i[ show edit update destroy ]
+  before_action :set_video_upload, only: %i[show edit update destroy]
 
   # GET /video_uploads or /video_uploads.json
   def index
     @video_uploads = VideoUpload.all
-	render json:@video_uploads
+    render json: @video_uploads
   end
 
   # GET /video_uploads/1 or /video_uploads/1.json
   def show
-	@video_upload = VideoUpload.find(params[:id])
-	render json:@video_upload
+    @video_upload = VideoUpload.find(params[:id])
+    render json: @video_upload
   end
 
   # GET /video_uploads/new
@@ -19,8 +22,8 @@ class VideoUploadsController < ApplicationController
   end
 
   # GET /video_uploads/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /video_uploads or /video_uploads.json
   def create
@@ -28,7 +31,7 @@ class VideoUploadsController < ApplicationController
 
     respond_to do |format|
       if @video_upload.save
-        format.html { redirect_to video_upload_url(@video_upload), notice: "Video upload was successfully created." }
+        format.html { redirect_to video_upload_url(@video_upload), notice: 'Video upload was successfully created.' }
         format.json { render :show, status: :created, location: @video_upload }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +44,7 @@ class VideoUploadsController < ApplicationController
   def update
     respond_to do |format|
       if @video_upload.update(video_upload_params)
-        format.html { redirect_to video_upload_url(@video_upload), notice: "Video upload was successfully updated." }
+        format.html { redirect_to video_upload_url(@video_upload), notice: 'Video upload was successfully updated.' }
         format.json { render :show, status: :ok, location: @video_upload }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,19 +58,20 @@ class VideoUploadsController < ApplicationController
     @video_upload.destroy!
 
     respond_to do |format|
-      format.html { redirect_to video_uploads_url, notice: "Video upload was successfully destroyed." }
+      format.html { redirect_to video_uploads_url, notice: 'Video upload was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_video_upload
-      @video_upload = VideoUpload.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def video_upload_params
-      params.require(:video_upload).permit(:caption, :video)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_video_upload
+    @video_upload = VideoUpload.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def video_upload_params
+    params.require(:video_upload).permit(:caption, :video)
+  end
 end

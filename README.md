@@ -1,24 +1,10 @@
-# README
+# Sodoto
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
 
-Things you may want to cover:
+Reinforce your own learning by teaching others.
 
-* Ruby version
+## Requirements
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- [PostgreSQL 9.3 +](https://www.postgresql.org/)
+- [Ruby 3.3.0](https://www.ruby-lang.org/en/)
