@@ -8,11 +8,10 @@ default: &default
 development:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
-  # min_messages: notice
 
 test:
   <<: *default
-  database: test
+  url: <%= ENV["DATABASE_URL"] %>
 
 production:
   <<: *default
